@@ -1,0 +1,21 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    depends_on:
+      - postgres
+  postgres:
+    image: sameersbn/postgresql
+    container_name: pgsql_shop
+    ports:
+    - "5432:5432"
+    environment:
+      - DB_USER=developer
+      - DB_PASS=developer
+      - DB_NAME=phoenixshop_dev
+    volumes:
+      - ./data/pgsql:/var/lib/postgresql/data
